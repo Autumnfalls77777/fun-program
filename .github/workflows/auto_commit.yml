@@ -1,0 +1,49 @@
+name: Auto Commit Workflow
+
+on:
+  schedule:
+    # =========================================================================
+    # EDIT YOUR AUTOMATIC COMMIT INTERVAL BELOW:
+    # Standard Cron Syntax: (Minute Hour Day-of-Month Month Day-of-Week)
+    #
+    # COMMON EXAMPLES:
+    # - Every 12 Hours (Default): '0 */12 * * *'
+    # - Every 6 Hours:           '0 */6 * * *'
+    # - Every 1 Hour:            '0 * * * *'
+    # - Once Daily (at Midnight):'0 0 * * *'
+    # =========================================================================
+    - cron: '0 */12 * * *'
+
+  # Allows triggering the workflow manually anytime from GitHub Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run auto-commit script
+        run: python auto_commit.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add activity_log.md
+          if git diff --staged --quiet; then
+            echo "No changes detected."
+          else
+            git commit -m "chore: automated contribution update [skip ci]"
+            git push
+          fi
