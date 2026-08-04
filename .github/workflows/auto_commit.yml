@@ -2,8 +2,8 @@ name: Auto Commit Workflow
 
 on:
   schedule:
-    # Shortest interval supported by GitHub Actions is 5 minutes (*/5 * * * *)
-    - cron: '*/5 * * * *'
+    # GitHub Actions throttles cron schedules < 15 minutes.
+    - cron: '*/15 * * * *'
 
   # Allows triggering the workflow manually anytime from GitHub Actions tab
   workflow_dispatch:
@@ -35,6 +35,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes detected."
           else
-            git commit -m "chore: automated contribution update [skip ci]"
+            git commit -m "chore: automated contribution update"
             git push
           fi
