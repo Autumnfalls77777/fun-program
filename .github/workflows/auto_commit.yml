@@ -2,17 +2,8 @@ name: Auto Commit Workflow
 
 on:
   schedule:
-    # =========================================================================
-    # EDIT YOUR AUTOMATIC COMMIT INTERVAL BELOW:
-    # Standard Cron Syntax: (Minute Hour Day-of-Month Month Day-of-Week)
-    #
-    # COMMON EXAMPLES:
-    # - Every 12 Hours (Default): '0 */12 * * *'
-    # - Every 6 Hours:           '0 */6 * * *'
-    # - Every 1 Hour:            '0 * * * *'
-    # - Once Daily (at Midnight):'0 0 * * *'
-    # =========================================================================
-    - cron: '0 */12 * * *'
+    # Shortest interval supported by GitHub Actions is 5 minutes (*/5 * * * *)
+    - cron: '*/5 * * * *'
 
   # Allows triggering the workflow manually anytime from GitHub Actions tab
   workflow_dispatch:
@@ -38,8 +29,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "Autumnfalls77777"
+          git config --global user.email "prabaljaiswal69420@gmail.com"
           git add activity_log.md
           if git diff --staged --quiet; then
             echo "No changes detected."
