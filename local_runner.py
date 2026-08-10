@@ -39,8 +39,9 @@ def commit_and_push():
 
 if __name__ == "__main__":
     import sys
-    interval_sec = int(sys.argv[1]) if len(sys.argv) > 1 else 120
-    print(f"🚀 Local Auto-Commit Runner Active! (Interval: {interval_sec} seconds)")
+    # Default to 12 hours (43200 seconds) for 2 commits per day
+    interval_sec = int(sys.argv[1]) if len(sys.argv) > 1 else 43200
+    print(f"🚀 Local Auto-Commit Runner Active! (Interval: {interval_sec} seconds / {interval_sec / 3600:.1f} hours)")
     print("Press Ctrl+C to stop.\n")
     
     while True:

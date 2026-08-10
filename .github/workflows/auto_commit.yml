@@ -2,8 +2,8 @@ name: Auto Commit Workflow
 
 on:
   schedule:
-    # Runs automatically on GitHub Cloud every hour (even when your PC is turned off)
-    - cron: '0 * * * *'
+    # Runs automatically on GitHub Cloud 2 times a day (every 12 hours)
+    - cron: '0 */12 * * *'
 
   # Allows triggering the workflow manually anytime from GitHub Actions tab
   workflow_dispatch:
